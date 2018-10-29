@@ -7,13 +7,14 @@
     "concurrently": "^3.6.0",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "mysql": "^2.16.0",
     "nodemon": "^1.17.5",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4"
   },
   "scripts": {
-    "start": "concurrently --kill-others \"node server\" \"npm run start:react-app\"",
+    "start": "concurrently --kill-others \"nodemon server\" \"npm run start:react-app\"",
     "start:react-app": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
