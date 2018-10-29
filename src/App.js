@@ -1,41 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
+import './App.css';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-class App extends React.Component {
-  state = {
-    employees: []
-  }
-  
-  componentWillMount = () => {
-    fetch('http://localhost:8080/api/employees')
-      .then(response => response.json())
-      .then(employees => this.setState({ employees }))
-  }
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+import Landing from './components/layout/Landing';
+import LandingReactTable from './components/layout/LandingReactTable';
+import AddEmployee from './components/employee/AddEmployee';
+import DeleteEmployee from './components/employee/DeleteEmployee';
+import UpdateEmployee from './components/employee/UpdateEmployee';
 
+class App extends Component {
+ 
   render() {
-    const {
-      employees
-    } = this.state;
-
-    console.log(this.state);
-
     return (
-      <div className="App">
-        <h1>Plexxis Employees</h1>
-        {
-          employees.map(employee => (
-            <div key={employee.id}>
-              {
-                Object.keys(employee).map(key => 
-                  <span key={key}>
-                    { key }:
-                    { employee[key] } 
-                  </span>
-                )
-              }
-            </div>
-          ))
-        }
-      </div>
+      <Router>
+        <div className="App">
+          <Navbar />
+          <Route exact path='/' component={Landing} />
+          <Route exact path='/emptable' component={LandingReactTable} />
+          <div className="container">
+            <Route exact path='/addemployee' component={AddEmployee} />
+            <Route exact path='/deleteemployee' component={DeleteEmployee} />
+            <Route exact path='/updateemployee' component={UpdateEmployee} />
+          </div>
+          <Footer />
+        </div>
+      </Router>
+      
     );
   }
 }
